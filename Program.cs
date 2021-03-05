@@ -2,10 +2,10 @@
 
 namespace Lab_2
 {
-    internal class
+    internal static class
         Task1 //Calculate the maximum degree of two that divides the product of consecutive numbers from a to b
     {
-        public ulong ReturnDeg(ulong first, ulong last)
+        public static ulong ReturnDeg(ulong first, ulong last)
         {
             if (first > last) return 0;
             first += first & 1;
@@ -28,9 +28,9 @@ namespace Lab_2
         }
     }
 
-    internal class Task2 //Convert string to a double
+    internal static class Task2 //Convert string to a double
     {
-        private int Pow(int x, int a)
+        private static int Pow(int x, int a)
         {
             if (a < 1) return 1;
             for (int x0 = x; a > 1; a--)
@@ -41,13 +41,13 @@ namespace Lab_2
             return x;
         }
 
-        public double StrToDouble(string @string)
+        public static double StrToDouble(string @string)
         {
             double number = 0;
             short point = 0;
             for (int i = 0; i < @string.Length; i++, number *= 10)
             {
-                if (Convert.ToBoolean(point))
+                if (point > 0)
                 {
                     point++;
                 }
@@ -60,15 +60,15 @@ namespace Lab_2
                 number += @string[i] - 48;
             }
 
-            number /= Pow(10, point);
+            number /= Pow(10, point + 1);
 
             return number;
         }
     }
 
-    internal class Task3 //Write character numbers as hexadecimal numbers
+    internal static class Task3 //Write character numbers as hexadecimal numbers
     {
-        private int Pow(int x, int a)
+        private static int Pow(int x, int a)
         {
             if (a < 1) return 1;
             for (int x0 = x; a > 1; a--)
@@ -79,26 +79,26 @@ namespace Lab_2
             return x;
         }
 
-        private string IntToHex(int number)
+        private static string IntToHex(int number)
         {
-            byte[] arr = new byte[4];
-            for (int i = 0; i < 4; i++)
+            var arr = new byte[4];
+            for (var i = 0; i < 4; i++)
             {
                 arr[i] = Convert.ToByte((number / Pow(16, 3 - i)) % 16);
             }
 
-            char[] charArr = new char[4];
+            var charArr = new char[4];
 
-            for (int i = 0; i < 4; i++)
+            for (var i = 0; i < 4; i++)
             {
                 charArr[i] = (arr[i] < 9) ? Convert.ToChar(48 + arr[i]) : Convert.ToChar(65 + arr[i] % 10);
             }
 
-            string hex = new string(charArr);
+            var hex = new string(charArr);
             return hex;
         }
 
-        public void WriteNumbers(string text)
+        public static void WriteNumbers(string text)
         {
             foreach (var t in text)
             {
@@ -120,37 +120,34 @@ namespace Lab_2
                     Console.WriteLine("Selected Task 1");
                     Console.WriteLine(
                         "Calculate the maximum degree of two that divides the product of consecutive numbers from a to b");
-                    Task1 task1 = new Task1();
                     Console.Write("a=");
                     ulong a = Convert.ToUInt64(Console.ReadLine());
                     Console.Write("b=");
                     ulong b = Convert.ToUInt64(Console.ReadLine());
-                    Console.WriteLine("Answer is " + task1.ReturnDeg(a, b));
-                    break;
+                    Console.WriteLine("Answer is " + Task1.ReturnDeg(a, b));
+                    return;
                 }
                 case '2':
                 {
                     Console.ReadLine();
                     Console.WriteLine("Selected Task 2");
                     Console.WriteLine("Convert string to a double");
-                    Task2 task2 = new Task2();
-                    Console.WriteLine(task2.StrToDouble(Console.ReadLine()));
-                    break;
+                    Console.WriteLine(Task2.StrToDouble(Console.ReadLine()));
+                    return;
                 }
                 case '3':
                 {
                     Console.ReadLine();
                     Console.WriteLine("Selected Task 3");
                     Console.WriteLine("Write character numbers as hexadecimal numbers");
-                    Task3 task3 = new Task3();
-                    task3.WriteNumbers(Console.ReadLine());
+                    Task3.WriteNumbers(Console.ReadLine());
                     Console.WriteLine();
-                    break;
+                    return;
                 }
                 default:
                 {
                     Console.WriteLine("Selected nothing");
-                    break;
+                    return;
                 }
             }
         }
