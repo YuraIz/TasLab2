@@ -1,7 +1,30 @@
 ﻿using System;
+using System.Linq;
 
 namespace Lab_2
 {
+    internal static class Check
+    {
+        public static string Number(string item)
+        {
+            if (item.All(i => i <= '9' && i >= '.' && i != '/')) return item;
+            Console.WriteLine("It is not a number");
+            return "0";
+        }
+        public static string Word(string item)
+        {
+            if (item.All(i => ((i >= 'A' && i <= 'Z') || (i >= 'a' && i <= 'z')))) return item;
+            Console.WriteLine("It is not a word");
+            return "0";
+        }
+        public static string Text(string item)
+        {
+            if (item.All(i => ((i >= 'A' && i <= 'Z') || (i >= 'a' && i <= 'z') || i == ' '))) return item;
+            Console.WriteLine("It is not a word");
+            return "0";
+        }
+    }
+    
     internal static class
         Task1 //Calculate the maximum degree of two that divides the product of consecutive numbers from a to b
     {
@@ -121,9 +144,9 @@ namespace Lab_2
                     Console.WriteLine(
                         "Calculate the maximum degree of two that divides the product of consecutive numbers from a to b");
                     Console.Write("a=");
-                    ulong a = Convert.ToUInt64(Console.ReadLine());
+                    ulong a = Convert.ToUInt64(Check.Number(Console.ReadLine()));
                     Console.Write("b=");
-                    ulong b = Convert.ToUInt64(Console.ReadLine());
+                    ulong b = Convert.ToUInt64(Check.Number(Console.ReadLine()));
                     Console.WriteLine("Answer is " + Task1.ReturnDeg(a, b));
                     return;
                 }
@@ -132,7 +155,7 @@ namespace Lab_2
                     Console.ReadLine();
                     Console.WriteLine("Selected Task 2");
                     Console.WriteLine("Convert string to a double");
-                    Console.WriteLine(Task2.StrToDouble(Console.ReadLine()));
+                    Console.WriteLine(Task2.StrToDouble(Check.Number(Console.ReadLine())));
                     return;
                 }
                 case '3':
